@@ -21,11 +21,21 @@ app.put('/documents/:filepath', function(req, res) {
 });
 
 app.get('/documents/:filepath', function(res, req) {
-  if (err) {
+  var filepath = './data/' + req.params.filepath;
+  if (filepath) {
+    fs.readFile(filepath, function(err, buffer) {
+      if (err) {
+        res.status(500);
+        res.json({status: 'Failed Because:', error: err.message});
+      }
+    })
+
+
+
+    ({filepath: 'filepath', contents: 'contents'});
+  } else {
     res.status(500);
     res.json({status: 'Failed Because:', error: err.message});
-  } else {
-
   }
 });
 
